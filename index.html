@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Lee | AI & Backend Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* About */
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-light);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-link {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-skills span {
+            padding: 0.25rem 0.6rem;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Experience */
+        .experience-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .exp-period {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .exp-company {
+            color: var(--accent-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .exp-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stats-row {
+                gap: 1.5rem;
+            }
+
+            .exp-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <img src="https://avatars.githubusercontent.com/u/208139204?v=4" alt="John Lee" class="avatar">
+            <h1>John Lee</h1>
+            <p class="tagline">AI & Backend Engineer | Building Intelligent Systems</p>
+            <div class="social-links">
+                <a href="https://github.com/64johnlee">📂 GitHub</a>
+                <a href="mailto:64lamei@gmail.com">📧 Email</a>
+                <a href="#contact">📬 Contact</a>
+            </div>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-value">Python</div>
+                <div class="stat-label">Primary Language</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">TypeScript</div>
+                <div class="stat-label">Backend Development</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">AI/LLM</div>
+                <div class="stat-label">Integration Focus</div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <section>
+            <h2>About Me</h2>
+            <p class="about-text">
+                Backend and AI systems engineer with hands-on experience in production-grade AI/LLM platforms.
+                Contributed to and deeply analyzed the archestra enterprise AI platform codebase, working on task queues,
+                knowledge base pipelines, MCP server runtime, and cache architecture. I write clean, maintainable code
+                and understand how to build systems that scale.
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section>
+            <h2>Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🤖 AI & LLM</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LLM Integration</span>
+                        <span class="skill-tag">Whisper STT</span>
+                        <span class="skill-tag">Edge TTS</span>
+                        <span class="skill-tag">RAG Pipelines</span>
+                        <span class="skill-tag">Vector Search</span>
+                        <span class="skill-tag">Embeddings</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Bash</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>� backend & Infra</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🛠️ Tools & Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">MCP Protocol</span>
+                        <span class="skill-tag">Drizzle ORM</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section>
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">🏢 archestra (Contributions)</span>
+                        <a href="https://github.com/archestra-ai/archestra" class="project-link" target="_blank">↗</a>
+                    </div>
+                    <p class="project-desc">
+                        Enterprise AI Platform. Analyzed task queues (877 lines, 5 handlers), knowledge base pipelines,
+                        K8s MCP runtime, and cache architecture. Fixed attempt-counting bug in task queue.
+                    </p>
+                    <div class="project-skills">
+                        <span>TypeScript</span>
+                        <span>PostgreSQL</span>
+                        <span>Kubernetes</span>
+                        <span>AI/LLM</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">🎬 YouTube Shorts Pipeline</span>
+                        <a href="https://github.com/64johnlee/youtube-pipeline" class="project-link" target="_blank">↗</a>
+                    </div>
+                    <p class="project-desc">
+                        End-to-end video processing: Whisper transcription → Google Translate → SRT subtitles →
+                        FFmpeg burning → YouTube duplicate detection. Zero API costs.
+                    </p>
+                    <div class="project-skills">
+                        <span>Python</span>
+                        <span>Whisper</span>
+                        <span>FFmpeg</span>
+                        <span>YouTube API</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">🎙️ IndoDub AI</span>
+                        <a href="https://github.com/64johnlee/indo-dub" class="project-link" target="_blank">↗</a>
+                    </div>
+                    <p class="project-desc">
+                        Multi-language video dubbing: Chinese → Indonesian voiceover using edge-tts neural voices,
+                        audio mixing with background music, SRT subtitle generation.
+                    </p>
+                    <div class="project-skills">
+                        <span>Python</span>
+                        <span>edge-tts</span>
+                        <span>FFmpeg</span>
+                        <span>Audio Processing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <h2>Experience Highlights</h2>
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">AI Systems Contributor</span>
+                    <span class="exp-period">2026</span>
+                </div>
+                <p class="exp-company">Open Source — archestra-ai/archestra</p>
+                <p class="exp-desc">
+                    Deep-dived into production enterprise AI codebase. Identified and fixed critical bugs in
+                    task queue attempt counting and cost optimization logic. Full code analysis of task queues,
+                    KB pipelines, K8s runtime, and cache systems.
+                </p>
+            </div>
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-title">AI Pipeline Developer</span>
+                    <span class="exp-period">2025-2026</span>
+                </div>
+                <p class="exp-company">Personal Projects</p>
+                <p class="exp-desc">
+                    Built YouTube Shorts automation pipeline with Whisper, translation, and subtitle generation.
+                    Developed video dubbing system with neural TTS. Created content processing workflows
+                    for social media automation.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="contact-section">
+                <h3>Let's Work Together</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Open to remote AI/ML and backend development opportunities
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:64lamei@gmail.com" class="contact-btn">
+                        📧 Email Me
+                    </a>
+                    <a href="https://github.com/64johnlee" class="contact-btn" style="background: var(--bg-secondary); border: 1px solid var(--border);">
+                        📂 GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with ❤️ | Singapore | 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
