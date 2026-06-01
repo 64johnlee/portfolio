@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Lee | AI & Backend Engineer</title>
+    <title>John Lee | AI &amp; Backend Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,15 +16,10 @@
             --accent-light: #818cf8;
             --accent-glow: rgba(99, 102, 241, 0.3);
             --border: rgba(255, 255, 255, 0.08);
-            --success: #22c55e;
-            --warning: #f59e0b;
+            --green: #10b981;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -34,11 +29,7 @@
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
 
         /* Header */
         header {
@@ -53,8 +44,8 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
+            width: 350px;
+            height: 350px;
             background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
             pointer-events: none;
         }
@@ -78,14 +69,41 @@
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .available-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.9rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 20px;
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+        }
+
+        .available-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -100,7 +118,7 @@
             border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             transition: all 0.2s ease;
         }
 
@@ -110,13 +128,42 @@
             transform: translateY(-2px);
         }
 
-        /* Sections */
-        section {
-            margin-bottom: 3rem;
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 0;
         }
 
+        .stat-item {
+            text-align: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            min-width: 120px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Sections */
+        section { margin-bottom: 3rem; }
+
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             display: flex;
@@ -127,23 +174,24 @@
         h2::before {
             content: '';
             width: 4px;
-            height: 24px;
+            height: 22px;
             background: var(--accent);
             border-radius: 2px;
+            flex-shrink: 0;
         }
 
         /* About */
         .about-text {
             color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.02rem;
+            line-height: 1.85;
         }
 
         /* Skills */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
         }
 
         .skill-category {
@@ -154,32 +202,39 @@
         }
 
         .skill-category h3 {
-            font-size: 1rem;
+            font-size: 0.92rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--accent-light);
         }
 
-        .skill-tags {
+        .skill-item {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.55rem;
         }
 
-        .skill-tag {
-            padding: 0.4rem 0.8rem;
-            background: var(--bg-secondary);
-            border-radius: 6px;
-            font-size: 0.85rem;
+        .skill-name {
+            font-size: 0.84rem;
             color: var(--text-secondary);
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            gap: 1.5rem;
+        .skill-level {
+            font-size: 0.68rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
+
+        .level-expert       { background: rgba(99,102,241,0.22); color: #818cf8; }
+        .level-advanced     { background: rgba(16,185,129,0.18); color: #10b981; }
+        .level-intermediate { background: rgba(245,158,11,0.18); color: #f59e0b; }
+
+        /* Projects */
+        .projects-grid { display: grid; gap: 1.25rem; }
 
         .project-card {
             background: var(--bg-card);
@@ -199,25 +254,36 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
 
-        .project-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+        .project-name { font-size: 1rem; font-weight: 600; }
 
         .project-link {
             color: var(--accent-light);
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            line-height: 1;
         }
 
         .project-desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            font-size: 0.78rem;
+            color: var(--accent-light);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .project-skills {
@@ -227,10 +293,10 @@
         }
 
         .project-skills span {
-            padding: 0.25rem 0.6rem;
+            padding: 0.2rem 0.6rem;
             background: var(--bg-secondary);
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             color: var(--text-secondary);
             font-family: 'JetBrains Mono', monospace;
         }
@@ -247,74 +313,83 @@
         .exp-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.35rem;
         }
 
-        .exp-title {
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
+        .exp-title { font-weight: 600; font-size: 1rem; }
 
         .exp-period {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
         }
 
         .exp-company {
-            color: var(--accent-light);
+            color: var(--text-secondary);
+            font-size: 0.84rem;
             margin-bottom: 0.75rem;
         }
 
-        .exp-desc {
+        .exp-bullets { list-style: none; padding: 0; }
+
+        .exp-bullets li {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.87rem;
+            padding-left: 1.1rem;
+            position: relative;
+            margin-bottom: 0.35rem;
+            line-height: 1.65;
         }
 
-        /* Stats */
-        .stats-row {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 2rem 0;
+        .exp-bullets li::before {
+            content: '\25B8';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
 
-        .stat-item {
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
             text-align: center;
+            transition: border-color 0.2s ease;
         }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-light);
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .achievement-card:hover { border-color: var(--accent); }
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
+        .achievement-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .achievement-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; }
+        .achievement-desc { color: var(--text-secondary); font-size: 0.78rem; }
 
         /* Contact */
         .contact-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
         }
 
-        .contact-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
+        .contact-section h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 
         .contact-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
 
         .contact-btn {
@@ -327,6 +402,7 @@
             text-decoration: none;
             border-radius: 8px;
             font-weight: 500;
+            font-size: 0.9rem;
             transition: all 0.2s ease;
         }
 
@@ -336,61 +412,67 @@
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Footer */
+        .contact-btn.secondary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .contact-btn.secondary:hover { border-color: var(--accent); }
+
         footer {
             text-align: center;
             padding: 2rem;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .stats-row {
-                gap: 1.5rem;
-            }
-
-            .exp-header {
-                flex-direction: column;
-                gap: 0.25rem;
-            }
+            .container { padding: 1rem; }
+            h1 { font-size: 1.9rem; }
+            .stats-row { gap: 0.75rem; }
+            .exp-header { flex-direction: column; gap: 0.2rem; }
+            .project-header { flex-direction: column; gap: 0.4rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+
         <!-- Header -->
         <header>
             <img src="https://avatars.githubusercontent.com/u/208139204?v=4" alt="John Lee" class="avatar">
             <h1>John Lee</h1>
-            <p class="tagline">AI & Backend Engineer | Building Intelligent Systems</p>
+            <p class="tagline">AI &amp; Backend Engineer &mdash; Building Intelligent Systems</p>
+            <div class="available-badge">
+                <div class="available-dot"></div>
+                Available for Remote Opportunities
+            </div>
             <div class="social-links">
-                <a href="https://github.com/64johnlee">📂 GitHub</a>
-                <a href="mailto:64lamei@gmail.com">📧 Email</a>
-                <a href="#contact">📬 Contact</a>
+                <a href="https://github.com/64johnlee" target="_blank">&#128194; GitHub</a>
+                <a href="https://linkedin.com/in/johnlee-lei" target="_blank">&#128279; LinkedIn</a>
+                <a href="mailto:64lamei@gmail.com">&#128231; Email</a>
             </div>
         </header>
 
         <!-- Stats -->
         <div class="stats-row">
             <div class="stat-item">
-                <div class="stat-value">Python</div>
-                <div class="stat-label">Primary Language</div>
+                <div class="stat-value">3+</div>
+                <div class="stat-label">AI Projects Shipped</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">TypeScript</div>
-                <div class="stat-label">Backend Development</div>
+                <div class="stat-value">59</div>
+                <div class="stat-label">GitHub Repositories</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">AI/LLM</div>
-                <div class="stat-label">Integration Focus</div>
+                <div class="stat-value">2+</div>
+                <div class="stat-label">Years Building</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">SG</div>
+                <div class="stat-label">Singapore</div>
             </div>
         </div>
 
@@ -398,56 +480,107 @@
         <section>
             <h2>About Me</h2>
             <p class="about-text">
-                Backend and AI systems engineer with hands-on experience in production-grade AI/LLM platforms.
-                Contributed to and deeply analyzed the archestra enterprise AI platform codebase, working on task queues,
-                knowledge base pipelines, MCP server runtime, and cache architecture. I write clean, maintainable code
-                and understand how to build systems that scale.
+                I'm a backend and AI systems engineer based in Singapore, specializing in production-grade LLM platforms
+                and intelligent automation pipelines. I've contributed to enterprise AI infrastructure (archestra),
+                built end-to-end media processing pipelines using Whisper and neural TTS, and created multi-language
+                video dubbing systems. I write clean, maintainable code focused on systems that scale &mdash; from
+                task queues and Kubernetes runtimes to RAG pipelines and vector search.
             </p>
         </section>
 
         <!-- Skills -->
         <section>
-            <h2>Skills & Technologies</h2>
+            <h2>Skills &amp; Technologies</h2>
             <div class="skills-grid">
+
                 <div class="skill-category">
-                    <h3>🤖 AI & LLM</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LLM Integration</span>
-                        <span class="skill-tag">Whisper STT</span>
-                        <span class="skill-tag">Edge TTS</span>
-                        <span class="skill-tag">RAG Pipelines</span>
-                        <span class="skill-tag">Vector Search</span>
-                        <span class="skill-tag">Embeddings</span>
+                    <h3>&#129302; AI &amp; LLM</h3>
+                    <div class="skill-item">
+                        <span class="skill-name">LLM Integration</span>
+                        <span class="skill-level level-expert">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">RAG Pipelines</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Whisper STT</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Vector Search</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Edge TTS</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
                     </div>
                 </div>
+
                 <div class="skill-category">
-                    <h3>💻 Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">Bash</span>
+                    <h3>&#128187; Languages</h3>
+                    <div class="skill-item">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-level level-expert">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">TypeScript</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">SQL</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Bash</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
                     </div>
                 </div>
+
                 <div class="skill-category">
-                    <h3>� backend & Infra</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Docker</span>
+                    <h3>&#9889; Backend &amp; Infra</h3>
+                    <div class="skill-item">
+                        <span class="skill-name">Node.js</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">PostgreSQL</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Docker</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Kubernetes</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Redis</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
                     </div>
                 </div>
+
                 <div class="skill-category">
-                    <h3>🛠️ Tools & Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">MCP Protocol</span>
-                        <span class="skill-tag">Drizzle ORM</span>
-                        <span class="skill-tag">GitHub Actions</span>
+                    <h3>&#9881; Tools &amp; Frameworks</h3>
+                    <div class="skill-item">
+                        <span class="skill-name">FastAPI</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">MCP Protocol</span>
+                        <span class="skill-level level-advanced">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">GitHub Actions</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Drizzle ORM</span>
+                        <span class="skill-level level-intermediate">Intermediate</span>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -455,85 +588,123 @@
         <section>
             <h2>Featured Projects</h2>
             <div class="projects-grid">
+
                 <div class="project-card">
                     <div class="project-header">
-                        <span class="project-name">🏢 archestra (Contributions)</span>
-                        <a href="https://github.com/archestra-ai/archestra" class="project-link" target="_blank">↗</a>
+                        <span class="project-name">&#127970; archestra &mdash; Enterprise AI Platform</span>
+                        <a href="https://github.com/archestra-ai/archestra" class="project-link" target="_blank">&#8599;</a>
                     </div>
                     <p class="project-desc">
-                        Enterprise AI Platform. Analyzed task queues (877 lines, 5 handlers), knowledge base pipelines,
-                        K8s MCP runtime, and cache architecture. Fixed attempt-counting bug in task queue.
+                        Contributed to a production enterprise AI platform with MCP registry, gateway, and orchestrator.
+                        Deep-dived into task queue architecture, knowledge base pipelines, K8s MCP runtime, and cache systems.
+                        Fixed a critical attempt-counting bug and optimized cost tracking logic.
                     </p>
+                    <div class="project-metrics">
+                        <span class="metric">877-line task queue</span>
+                        <span class="metric">5 handlers mapped</span>
+                        <span class="metric">Production bug fixed</span>
+                    </div>
                     <div class="project-skills">
-                        <span>TypeScript</span>
-                        <span>PostgreSQL</span>
-                        <span>Kubernetes</span>
-                        <span>AI/LLM</span>
+                        <span>TypeScript</span><span>PostgreSQL</span><span>Kubernetes</span><span>MCP</span><span>AI/LLM</span>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
-                        <span class="project-name">🎬 YouTube Shorts Pipeline</span>
-                        <a href="https://github.com/64johnlee/youtube-pipeline" class="project-link" target="_blank">↗</a>
+                        <span class="project-name">&#127916; YouTube Shorts Pipeline</span>
+                        <a href="https://github.com/64johnlee/youtube-pipeline" class="project-link" target="_blank">&#8599;</a>
                     </div>
                     <p class="project-desc">
-                        End-to-end video processing: Whisper transcription → Google Translate → SRT subtitles →
-                        FFmpeg burning → YouTube duplicate detection. Zero API costs.
+                        Fully automated end-to-end video processing pipeline: Whisper transcription &rarr; Google Translate
+                        &rarr; SRT subtitle generation &rarr; FFmpeg burning &rarr; YouTube upload with duplicate detection.
+                        Runs entirely with zero API costs using local Whisper inference.
                     </p>
+                    <div class="project-metrics">
+                        <span class="metric">100% automated</span>
+                        <span class="metric">Zero API cost</span>
+                        <span class="metric">Multi-language</span>
+                    </div>
                     <div class="project-skills">
-                        <span>Python</span>
-                        <span>Whisper</span>
-                        <span>FFmpeg</span>
-                        <span>YouTube API</span>
+                        <span>Python</span><span>Whisper</span><span>FFmpeg</span><span>YouTube API</span><span>Google Translate</span>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
-                        <span class="project-name">🎙️ IndoDub AI</span>
-                        <a href="https://github.com/64johnlee/indo-dub" class="project-link" target="_blank">↗</a>
+                        <span class="project-name">&#127897; IndoDub AI &mdash; Video Dubbing System</span>
+                        <a href="https://github.com/64johnlee/indo-dub" class="project-link" target="_blank">&#8599;</a>
                     </div>
                     <p class="project-desc">
-                        Multi-language video dubbing: Chinese → Indonesian voiceover using edge-tts neural voices,
-                        audio mixing with background music, SRT subtitle generation.
+                        Multi-language video dubbing system: Chinese &rarr; Indonesian voiceover using neural edge-tts voices,
+                        audio mixing with background music preservation, and SRT subtitle generation.
+                        Produces broadcast-ready dubbed video output.
                     </p>
+                    <div class="project-metrics">
+                        <span class="metric">Neural TTS voices</span>
+                        <span class="metric">Music preserved</span>
+                        <span class="metric">Broadcast-ready</span>
+                    </div>
                     <div class="project-skills">
-                        <span>Python</span>
-                        <span>edge-tts</span>
-                        <span>FFmpeg</span>
-                        <span>Audio Processing</span>
+                        <span>Python</span><span>edge-tts</span><span>FFmpeg</span><span>Audio Processing</span>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- Experience -->
         <section>
-            <h2>Experience Highlights</h2>
+            <h2>Experience</h2>
+
             <div class="experience-item">
                 <div class="exp-header">
                     <span class="exp-title">AI Systems Contributor</span>
-                    <span class="exp-period">2026</span>
+                    <span class="exp-period">Jan 2026 &ndash; Present</span>
                 </div>
-                <p class="exp-company">Open Source — archestra-ai/archestra</p>
-                <p class="exp-desc">
-                    Deep-dived into production enterprise AI codebase. Identified and fixed critical bugs in
-                    task queue attempt counting and cost optimization logic. Full code analysis of task queues,
-                    KB pipelines, K8s runtime, and cache systems.
-                </p>
+                <p class="exp-company">Open Source &middot; archestra-ai/archestra</p>
+                <ul class="exp-bullets">
+                    <li>Analyzed 877-line task queue with 5 handler types in a production enterprise AI platform</li>
+                    <li>Identified and fixed critical bug in attempt-counting logic affecting task retry behavior</li>
+                    <li>Mapped full architecture: K8s MCP runtime, knowledge base pipelines, and cache systems</li>
+                    <li>Contributed cost tracking and LLM usage monitoring optimizations</li>
+                </ul>
             </div>
+
             <div class="experience-item">
                 <div class="exp-header">
                     <span class="exp-title">AI Pipeline Developer</span>
-                    <span class="exp-period">2025-2026</span>
+                    <span class="exp-period">2025 &ndash; Present</span>
                 </div>
-                <p class="exp-company">Personal Projects</p>
-                <p class="exp-desc">
-                    Built YouTube Shorts automation pipeline with Whisper, translation, and subtitle generation.
-                    Developed video dubbing system with neural TTS. Created content processing workflows
-                    for social media automation.
-                </p>
+                <p class="exp-company">Personal Projects &middot; Singapore</p>
+                <ul class="exp-bullets">
+                    <li>Built fully automated YouTube Shorts pipeline handling transcription, translation, and upload</li>
+                    <li>Developed IndoDub AI &mdash; a multi-language video dubbing system with neural TTS</li>
+                    <li>Implemented RAG pipelines and vector search integrations for LLM-powered apps</li>
+                    <li>Deployed services via Docker and Kubernetes for scalable production environments</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- GitHub Achievements -->
+        <section>
+            <h2>GitHub Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">&#129309;</div>
+                    <div class="achievement-name">Pair Extraordinaire</div>
+                    <div class="achievement-desc">Co-authored commits with collaborators</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">&#9889;</div>
+                    <div class="achievement-name">Quickdraw</div>
+                    <div class="achievement-desc">Rapid issue and PR response</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">&#129416;</div>
+                    <div class="achievement-name">Pull Shark</div>
+                    <div class="achievement-desc">Multiple merged pull requests</div>
+                </div>
             </div>
         </section>
 
@@ -541,23 +712,21 @@
         <section id="contact">
             <div class="contact-section">
                 <h3>Let's Work Together</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-                    Open to remote AI/ML and backend development opportunities
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Open to remote AI/ML and backend engineering opportunities worldwide
                 </p>
                 <div class="contact-links">
-                    <a href="mailto:64lamei@gmail.com" class="contact-btn">
-                        📧 Email Me
-                    </a>
-                    <a href="https://github.com/64johnlee" class="contact-btn" style="background: var(--bg-secondary); border: 1px solid var(--border);">
-                        📂 GitHub
-                    </a>
+                    <a href="mailto:64lamei@gmail.com" class="contact-btn">&#128231; Email Me</a>
+                    <a href="https://github.com/64johnlee" class="contact-btn secondary" target="_blank">&#128194; GitHub</a>
+                    <a href="https://linkedin.com/in/johnlee-lei" class="contact-btn secondary" target="_blank">&#128279; LinkedIn</a>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p>Built with ❤️ | Singapore | 2026</p>
+            <p>John Lee &mdash; AI &amp; Backend Engineer &mdash; Singapore</p>
         </footer>
+
     </div>
 </body>
 </html>
