@@ -3,8 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Lee | AI &amp; Backend Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>John Lee | AI Engineer Singapore &mdash; Backend &amp; LLM Systems</title>
+    <meta name="description" content="John Lee is an AI engineer based in Singapore specialising in production LLM platforms, RAG pipelines, and intelligent automation. Open to remote roles.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://64johnlee.github.io/portfolio/">
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/208139204?v=4&s=32">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://64johnlee.github.io/portfolio/">
+    <meta property="og:title" content="John Lee | AI Engineer Singapore">
+    <meta property="og:description" content="Backend &amp; AI systems engineer in Singapore. LLM platforms, RAG pipelines, production automation. Open to remote roles.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/208139204?v=4">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="John Lee | AI Engineer Singapore">
+    <meta name="twitter:description" content="Backend &amp; AI systems engineer in Singapore. LLM platforms, RAG pipelines, production automation.">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/208139204?v=4">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "John Lee",
+      "jobTitle": "AI & Backend Engineer",
+      "url": "https://64johnlee.github.io/portfolio/",
+      "email": "64lamei@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Singapore" },
+      "sameAs": [
+        "https://github.com/64johnlee",
+        "https://linkedin.com/in/johnlee-lei"
+      ],
+      "knowsAbout": ["LLM Integration", "RAG Pipelines", "Python", "TypeScript", "Kubernetes", "FastAPI"]
+    }
+    </script>
+
+    <!-- Fonts: async load to avoid render-blocking -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+
     <style>
         :root {
             --bg-primary: #0a0a0f;
@@ -29,9 +70,22 @@
             min-height: 100vh;
         }
 
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 0 0 8px 0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+        .skip-link:focus { top: 0; }
+
         .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
 
-        /* Header */
         header {
             text-align: center;
             padding: 4rem 0 3rem;
@@ -68,11 +122,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .tagline {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
+        .tagline { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1rem; }
 
         .available-badge {
             display: inline-flex;
@@ -101,24 +151,30 @@
             50% { opacity: 0.3; }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .available-dot { animation: none; }
+        }
+
         .social-links {
             display: flex;
             gap: 0.75rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
+            padding: 0.7rem 1.2rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
             font-size: 0.88rem;
+            min-height: 44px;
             transition: all 0.2s ease;
         }
 
@@ -128,7 +184,28 @@
             transform: translateY(-2px);
         }
 
-        /* Stats */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            min-height: 44px;
+            transition: all 0.2s ease;
+            margin-top: 0.75rem;
+        }
+
+        .resume-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
         .stats-row {
             display: flex;
             gap: 1rem;
@@ -153,13 +230,8 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.78rem;
-            margin-top: 0.2rem;
-        }
+        .stat-label { color: var(--text-secondary); font-size: 0.78rem; margin-top: 0.2rem; }
 
-        /* Sections */
         section { margin-bottom: 3rem; }
 
         h2 {
@@ -180,14 +252,8 @@
             flex-shrink: 0;
         }
 
-        /* About */
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 1.02rem;
-            line-height: 1.85;
-        }
+        .about-text { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.85; }
 
-        /* Skills */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -201,39 +267,18 @@
             padding: 1.5rem;
         }
 
-        .skill-category h3 {
-            font-size: 0.92rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--accent-light);
-        }
+        .skill-category h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent-light); }
 
-        .skill-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.55rem;
-        }
+        .skill-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.55rem; }
 
-        .skill-name {
-            font-size: 0.84rem;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .skill-name { font-size: 0.84rem; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
 
-        .skill-level {
-            font-size: 0.68rem;
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
+        .skill-level { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; letter-spacing: 0.02em; }
 
         .level-expert       { background: rgba(99,102,241,0.22); color: #818cf8; }
         .level-advanced     { background: rgba(16,185,129,0.18); color: #10b981; }
         .level-intermediate { background: rgba(245,158,11,0.18); color: #f59e0b; }
 
-        /* Projects */
         .projects-grid { display: grid; gap: 1.25rem; }
 
         .project-card {
@@ -250,12 +295,7 @@
             transform: translateY(-3px);
         }
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.6rem;
-        }
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
 
         .project-name { font-size: 1rem; font-weight: 600; }
 
@@ -263,34 +303,20 @@
             color: var(--accent-light);
             text-decoration: none;
             font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        .project-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: 0.75rem;
-        }
-
-        .project-metrics {
+            min-width: 44px;
+            min-height: 44px;
             display: flex;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
         }
 
-        .metric {
-            font-size: 0.78rem;
-            color: var(--accent-light);
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .project-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.75rem; }
 
-        .project-skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
+        .project-metrics { display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+
+        .metric { font-size: 0.78rem; color: var(--accent-light); font-family: 'JetBrains Mono', monospace; }
+
+        .project-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
         .project-skills span {
             padding: 0.2rem 0.6rem;
@@ -301,7 +327,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Experience */
         .experience-item {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -310,28 +335,13 @@
             margin-bottom: 1rem;
         }
 
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 0.35rem;
-        }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.35rem; }
 
         .exp-title { font-weight: 600; font-size: 1rem; }
 
-        .exp-period {
-            color: var(--accent-light);
-            font-size: 0.78rem;
-            font-family: 'JetBrains Mono', monospace;
-            white-space: nowrap;
-        }
+        .exp-period { color: var(--accent-light); font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 
-        .exp-company {
-            color: var(--text-secondary);
-            font-size: 0.84rem;
-            margin-bottom: 0.75rem;
-        }
+        .exp-company { color: var(--text-secondary); font-size: 0.84rem; margin-bottom: 0.75rem; }
 
         .exp-bullets { list-style: none; padding: 0; }
 
@@ -344,14 +354,8 @@
             line-height: 1.65;
         }
 
-        .exp-bullets li::before {
-            content: '\25B8';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
+        .exp-bullets li::before { content: '\25B8'; position: absolute; left: 0; color: var(--accent); }
 
-        /* Achievements */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -373,7 +377,6 @@
         .achievement-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.25rem; }
         .achievement-desc { color: var(--text-secondary); font-size: 0.78rem; }
 
-        /* Contact */
         .contact-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -382,15 +385,10 @@
             text-align: center;
         }
 
-        .contact-section h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .contact-section h2 { justify-content: center; }
+        .contact-section h2::before { display: none; }
 
-        .contact-links {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
+        .contact-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
 
         .contact-btn {
             display: inline-flex;
@@ -403,20 +401,13 @@
             border-radius: 8px;
             font-weight: 500;
             font-size: 0.9rem;
+            min-height: 44px;
             transition: all 0.2s ease;
         }
 
-        .contact-btn:hover {
-            background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
+        .contact-btn:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 0 20px var(--accent-glow); }
 
-        .contact-btn.secondary {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-        }
-
+        .contact-btn.secondary { background: var(--bg-secondary); border: 1px solid var(--border); }
         .contact-btn.secondary:hover { border-color: var(--accent); }
 
         footer {
@@ -428,6 +419,8 @@
             margin-top: 1rem;
         }
 
+        @media (max-width: 768px) { .social-links { gap: 0.5rem; } }
+
         @media (max-width: 600px) {
             .container { padding: 1rem; }
             h1 { font-size: 1.9rem; }
@@ -438,26 +431,32 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
 
-        <!-- Header -->
         <header>
-            <img src="https://avatars.githubusercontent.com/u/208139204?v=4" alt="John Lee" class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/208139204?v=4&s=240"
+                 alt="John Lee – profile photo"
+                 class="avatar"
+                 width="120"
+                 height="120"
+                 fetchpriority="high"
+                 decoding="async">
             <h1>John Lee</h1>
-            <p class="tagline">AI &amp; Backend Engineer &mdash; Building Intelligent Systems</p>
-            <div class="available-badge">
-                <div class="available-dot"></div>
-                Available for Remote Opportunities
+            <p class="tagline">AI Engineer, Singapore &mdash; Backend &amp; LLM Systems</p>
+            <div class="available-badge" role="status">
+                <div class="available-dot" aria-hidden="true"></div>
+                Open to full-time remote roles (SGT, UTC+8)
             </div>
             <div class="social-links">
-                <a href="https://github.com/64johnlee" target="_blank">&#128194; GitHub</a>
-                <a href="https://linkedin.com/in/johnlee-lei" target="_blank">&#128279; LinkedIn</a>
-                <a href="mailto:64lamei@gmail.com">&#128231; Email</a>
+                <a href="https://github.com/64johnlee" target="_blank" rel="noopener noreferrer" aria-label="Visit John Lee's GitHub profile (opens in new tab)">&#128194; GitHub</a>
+                <a href="https://www.linkedin.com/in/johnlee-lei" target="_blank" rel="noopener noreferrer" aria-label="Visit John Lee's LinkedIn profile (opens in new tab)">&#128279; LinkedIn</a>
+                <a href="mailto:64lamei@gmail.com" aria-label="Send email to John Lee">&#128231; Email</a>
             </div>
+            <a href="https://64johnlee.github.io/portfolio/resume.pdf" class="resume-btn" aria-label="Download resume as PDF">&#128196; Download Resume</a>
         </header>
 
-        <!-- Stats -->
-        <div class="stats-row">
+        <div class="stats-row" role="region" aria-label="Key statistics">
             <div class="stat-item">
                 <div class="stat-value">3+</div>
                 <div class="stat-label">AI Projects Shipped</div>
@@ -476,255 +475,217 @@
             </div>
         </div>
 
-        <!-- About -->
-        <section>
-            <h2>About Me</h2>
-            <p class="about-text">
-                I'm a backend and AI systems engineer based in Singapore, specializing in production-grade LLM platforms
-                and intelligent automation pipelines. I've contributed to enterprise AI infrastructure (archestra),
-                built end-to-end media processing pipelines using Whisper and neural TTS, and created multi-language
-                video dubbing systems. I write clean, maintainable code focused on systems that scale &mdash; from
-                task queues and Kubernetes runtimes to RAG pipelines and vector search.
-            </p>
-        </section>
+        <main id="main-content">
 
-        <!-- Skills -->
-        <section>
-            <h2>Skills &amp; Technologies</h2>
-            <div class="skills-grid">
-
-                <div class="skill-category">
-                    <h3>&#129302; AI &amp; LLM</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">LLM Integration</span>
-                        <span class="skill-level level-expert">Expert</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">RAG Pipelines</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Whisper STT</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Vector Search</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Edge TTS</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>&#128187; Languages</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Python</span>
-                        <span class="skill-level level-expert">Expert</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">TypeScript</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">SQL</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Bash</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>&#9889; Backend &amp; Infra</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Node.js</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">PostgreSQL</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Docker</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Kubernetes</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Redis</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>&#9881; Tools &amp; Frameworks</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">FastAPI</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">MCP Protocol</span>
-                        <span class="skill-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">GitHub Actions</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Drizzle ORM</span>
-                        <span class="skill-level level-intermediate">Intermediate</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Projects -->
-        <section>
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-name">&#127970; archestra &mdash; Enterprise AI Platform</span>
-                        <a href="https://github.com/archestra-ai/archestra" class="project-link" target="_blank">&#8599;</a>
-                    </div>
-                    <p class="project-desc">
-                        Contributed to a production enterprise AI platform with MCP registry, gateway, and orchestrator.
-                        Deep-dived into task queue architecture, knowledge base pipelines, K8s MCP runtime, and cache systems.
-                        Fixed a critical attempt-counting bug and optimized cost tracking logic.
-                    </p>
-                    <div class="project-metrics">
-                        <span class="metric">877-line task queue</span>
-                        <span class="metric">5 handlers mapped</span>
-                        <span class="metric">Production bug fixed</span>
-                    </div>
-                    <div class="project-skills">
-                        <span>TypeScript</span><span>PostgreSQL</span><span>Kubernetes</span><span>MCP</span><span>AI/LLM</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-name">&#127916; YouTube Shorts Pipeline</span>
-                        <a href="https://github.com/64johnlee/youtube-pipeline" class="project-link" target="_blank">&#8599;</a>
-                    </div>
-                    <p class="project-desc">
-                        Fully automated end-to-end video processing pipeline: Whisper transcription &rarr; Google Translate
-                        &rarr; SRT subtitle generation &rarr; FFmpeg burning &rarr; YouTube upload with duplicate detection.
-                        Runs entirely with zero API costs using local Whisper inference.
-                    </p>
-                    <div class="project-metrics">
-                        <span class="metric">100% automated</span>
-                        <span class="metric">Zero API cost</span>
-                        <span class="metric">Multi-language</span>
-                    </div>
-                    <div class="project-skills">
-                        <span>Python</span><span>Whisper</span><span>FFmpeg</span><span>YouTube API</span><span>Google Translate</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-name">&#127897; IndoDub AI &mdash; Video Dubbing System</span>
-                        <a href="https://github.com/64johnlee/indo-dub" class="project-link" target="_blank">&#8599;</a>
-                    </div>
-                    <p class="project-desc">
-                        Multi-language video dubbing system: Chinese &rarr; Indonesian voiceover using neural edge-tts voices,
-                        audio mixing with background music preservation, and SRT subtitle generation.
-                        Produces broadcast-ready dubbed video output.
-                    </p>
-                    <div class="project-metrics">
-                        <span class="metric">Neural TTS voices</span>
-                        <span class="metric">Music preserved</span>
-                        <span class="metric">Broadcast-ready</span>
-                    </div>
-                    <div class="project-skills">
-                        <span>Python</span><span>edge-tts</span><span>FFmpeg</span><span>Audio Processing</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section>
-            <h2>Experience</h2>
-
-            <div class="experience-item">
-                <div class="exp-header">
-                    <span class="exp-title">AI Systems Contributor</span>
-                    <span class="exp-period">Jan 2026 &ndash; Present</span>
-                </div>
-                <p class="exp-company">Open Source &middot; archestra-ai/archestra</p>
-                <ul class="exp-bullets">
-                    <li>Analyzed 877-line task queue with 5 handler types in a production enterprise AI platform</li>
-                    <li>Identified and fixed critical bug in attempt-counting logic affecting task retry behavior</li>
-                    <li>Mapped full architecture: K8s MCP runtime, knowledge base pipelines, and cache systems</li>
-                    <li>Contributed cost tracking and LLM usage monitoring optimizations</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="exp-header">
-                    <span class="exp-title">AI Pipeline Developer</span>
-                    <span class="exp-period">2025 &ndash; Present</span>
-                </div>
-                <p class="exp-company">Personal Projects &middot; Singapore</p>
-                <ul class="exp-bullets">
-                    <li>Built fully automated YouTube Shorts pipeline handling transcription, translation, and upload</li>
-                    <li>Developed IndoDub AI &mdash; a multi-language video dubbing system with neural TTS</li>
-                    <li>Implemented RAG pipelines and vector search integrations for LLM-powered apps</li>
-                    <li>Deployed services via Docker and Kubernetes for scalable production environments</li>
-                </ul>
-            </div>
-
-        </section>
-
-        <!-- GitHub Achievements -->
-        <section>
-            <h2>GitHub Achievements</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-icon">&#129309;</div>
-                    <div class="achievement-name">Pair Extraordinaire</div>
-                    <div class="achievement-desc">Co-authored commits with collaborators</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">&#9889;</div>
-                    <div class="achievement-name">Quickdraw</div>
-                    <div class="achievement-desc">Rapid issue and PR response</div>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">&#129416;</div>
-                    <div class="achievement-name">Pull Shark</div>
-                    <div class="achievement-desc">Multiple merged pull requests</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact">
-            <div class="contact-section">
-                <h3>Let's Work Together</h3>
-                <p style="color: var(--text-secondary); font-size: 0.95rem;">
-                    Open to remote AI/ML and backend engineering opportunities worldwide
+            <section aria-labelledby="about-heading">
+                <h2 id="about-heading">About Me</h2>
+                <p class="about-text">
+                    I'm an AI engineer based in Singapore specialising in production-grade LLM platforms
+                    and intelligent automation pipelines. I've contributed to enterprise AI infrastructure (archestra),
+                    built end-to-end media processing pipelines using Whisper and neural TTS, and created multi-language
+                    video dubbing systems. I write clean, maintainable code focused on systems that scale &mdash; from
+                    task queues and Kubernetes runtimes to RAG pipelines and vector search.
                 </p>
-                <div class="contact-links">
-                    <a href="mailto:64lamei@gmail.com" class="contact-btn">&#128231; Email Me</a>
-                    <a href="https://github.com/64johnlee" class="contact-btn secondary" target="_blank">&#128194; GitHub</a>
-                    <a href="https://linkedin.com/in/johnlee-lei" class="contact-btn secondary" target="_blank">&#128279; LinkedIn</a>
+            </section>
+
+            <section aria-labelledby="skills-heading">
+                <h2 id="skills-heading">Skills &amp; Technologies</h2>
+                <div class="skills-grid">
+
+                    <div class="skill-category">
+                        <h3><span aria-hidden="true">&#129302;</span> AI &amp; LLM</h3>
+                        <div class="skill-item"><span class="skill-name">LLM Integration</span><span class="skill-level level-expert">Expert</span></div>
+                        <div class="skill-item"><span class="skill-name">RAG Pipelines</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Whisper STT</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Vector Search</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Edge TTS</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3><span aria-hidden="true">&#128187;</span> Languages</h3>
+                        <div class="skill-item"><span class="skill-name">Python</span><span class="skill-level level-expert">Expert</span></div>
+                        <div class="skill-item"><span class="skill-name">TypeScript</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">SQL</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Bash</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3><span aria-hidden="true">&#9889;</span> Backend &amp; Infra</h3>
+                        <div class="skill-item"><span class="skill-name">Node.js</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">PostgreSQL</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Docker</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">Kubernetes</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                        <div class="skill-item"><span class="skill-name">Redis</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3><span aria-hidden="true">&#9881;</span> Tools &amp; Frameworks</h3>
+                        <div class="skill-item"><span class="skill-name">FastAPI</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">MCP Protocol</span><span class="skill-level level-advanced">Advanced</span></div>
+                        <div class="skill-item"><span class="skill-name">GitHub Actions</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                        <div class="skill-item"><span class="skill-name">Drizzle ORM</span><span class="skill-level level-intermediate">Intermediate</span></div>
+                    </div>
+
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section aria-labelledby="projects-heading">
+                <h2 id="projects-heading">Featured Projects</h2>
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-header">
+                            <span class="project-name"><span aria-hidden="true">&#127970;</span> archestra &mdash; Enterprise AI Platform</span>
+                            <a href="https://github.com/archestra-ai/archestra" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View archestra on GitHub (opens in new tab)">&#8599;</a>
+                        </div>
+                        <p class="project-desc">
+                            Contributed to a production enterprise AI platform with MCP registry, gateway, and orchestrator.
+                            Deep-dived into task queue architecture, knowledge base pipelines, K8s MCP runtime, and cache systems.
+                            Fixed a critical attempt-counting bug and optimized cost tracking logic.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">877-line task queue</span>
+                            <span class="metric">5 handlers mapped</span>
+                            <span class="metric">Production bug fixed</span>
+                        </div>
+                        <div class="project-skills">
+                            <span>TypeScript</span><span>PostgreSQL</span><span>Kubernetes</span><span>MCP</span><span>AI/LLM</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-header">
+                            <span class="project-name"><span aria-hidden="true">&#127916;</span> YouTube Shorts Pipeline</span>
+                            <a href="https://github.com/64johnlee" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub — code available on request (opens in new tab)" title="Code available on request">&#8599;</a>
+                        </div>
+                        <p class="project-desc">
+                            Fully automated end-to-end video processing pipeline: Whisper transcription &rarr; Google Translate
+                            &rarr; SRT subtitle generation &rarr; FFmpeg burning &rarr; YouTube upload with duplicate detection.
+                            Runs entirely with zero API costs using local Whisper inference.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">100% automated</span>
+                            <span class="metric">Zero API cost</span>
+                            <span class="metric">Multi-language</span>
+                        </div>
+                        <div class="project-skills">
+                            <span>Python</span><span>Whisper</span><span>FFmpeg</span><span>YouTube API</span><span>Google Translate</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-header">
+                            <span class="project-name"><span aria-hidden="true">&#127897;</span> IndoDub AI &mdash; Video Dubbing System</span>
+                            <a href="https://github.com/64johnlee" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub — code available on request (opens in new tab)" title="Code available on request">&#8599;</a>
+                        </div>
+                        <p class="project-desc">
+                            Multi-language video dubbing system: Chinese &rarr; Indonesian voiceover using neural edge-tts voices,
+                            audio mixing with background music preservation, and SRT subtitle generation.
+                            Produces broadcast-ready dubbed video output.
+                        </p>
+                        <div class="project-metrics">
+                            <span class="metric">Neural TTS voices</span>
+                            <span class="metric">Music preserved</span>
+                            <span class="metric">Broadcast-ready</span>
+                        </div>
+                        <div class="project-skills">
+                            <span>Python</span><span>edge-tts</span><span>FFmpeg</span><span>Audio Processing</span>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <section aria-labelledby="experience-heading">
+                <h2 id="experience-heading">Experience</h2>
+
+                <article class="experience-item">
+                    <div class="exp-header">
+                        <span class="exp-title">AI Systems Contributor</span>
+                        <span class="exp-period">Jan 2026 &ndash; Present</span>
+                    </div>
+                    <p class="exp-company">Open Source &middot; archestra-ai/archestra</p>
+                    <ul class="exp-bullets">
+                        <li>Analyzed 877-line task queue with 5 handler types in a production enterprise AI platform</li>
+                        <li>Identified and fixed critical bug in attempt-counting logic affecting task retry behavior</li>
+                        <li>Mapped full architecture: K8s MCP runtime, knowledge base pipelines, and cache systems</li>
+                        <li>Contributed cost tracking and LLM usage monitoring optimizations</li>
+                    </ul>
+                </article>
+
+                <article class="experience-item">
+                    <div class="exp-header">
+                        <span class="exp-title">AI Pipeline Developer</span>
+                        <span class="exp-period">Jan 2025 &ndash; Present</span>
+                    </div>
+                    <p class="exp-company">Independent Projects &middot; Singapore</p>
+                    <ul class="exp-bullets">
+                        <li>Built fully automated YouTube Shorts pipeline handling transcription, translation, and upload</li>
+                        <li>Developed IndoDub AI &mdash; a multi-language video dubbing system with neural TTS</li>
+                        <li>Implemented RAG pipelines and vector search integrations for LLM-powered apps</li>
+                        <li>Deployed services via Docker and Kubernetes for scalable production environments</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <section aria-labelledby="education-heading">
+                <h2 id="education-heading">Education &amp; Learning</h2>
+
+                <article class="experience-item">
+                    <div class="exp-header">
+                        <span class="exp-title">Self-Taught AI &amp; Backend Engineer</span>
+                        <span class="exp-period">2023 &ndash; Present</span>
+                    </div>
+                    <p class="exp-company">Independent Study</p>
+                    <ul class="exp-bullets">
+                        <li>Deep study of LLM systems, RAG architecture, and production AI infrastructure</li>
+                        <li>Hands-on experience through open source contributions and personal projects</li>
+                        <li>Continuous learning via DeepLearning.AI, fast.ai, and production codebase analysis</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <section aria-labelledby="achievements-heading">
+                <h2 id="achievements-heading">GitHub Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon" aria-hidden="true">&#129309;</div>
+                        <div class="achievement-name">Pair Extraordinaire</div>
+                        <div class="achievement-desc">Co-authored commits with collaborators</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon" aria-hidden="true">&#9889;</div>
+                        <div class="achievement-name">Quickdraw</div>
+                        <div class="achievement-desc">Rapid issue and PR response</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon" aria-hidden="true">&#129416;</div>
+                        <div class="achievement-name">Pull Shark</div>
+                        <div class="achievement-desc">Multiple merged pull requests</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" aria-labelledby="contact-heading">
+                <div class="contact-section">
+                    <h2 id="contact-heading">Let's Work Together</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Open to full-time remote AI/ML and backend engineering roles &mdash; AI engineer Singapore, available UTC+8 overlap
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:64lamei@gmail.com" class="contact-btn" aria-label="Send email to John Lee">&#128231; Email Me</a>
+                        <a href="https://github.com/64johnlee" class="contact-btn secondary" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile (opens in new tab)">&#128194; GitHub</a>
+                        <a href="https://www.linkedin.com/in/johnlee-lei" class="contact-btn secondary" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile (opens in new tab)">&#128279; LinkedIn</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
 
         <footer>
-            <p>John Lee &mdash; AI &amp; Backend Engineer &mdash; Singapore</p>
+            <p>John Lee &mdash; AI Engineer, Singapore &mdash; &copy; 2025&ndash;2026</p>
         </footer>
 
     </div>
