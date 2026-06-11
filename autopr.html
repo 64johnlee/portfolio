@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPR: Building an Autonomous Agent That Finds Bounties and Ships Pull Requests | John Lee</title>
+    <meta name="description" content="Engineering write-up: how I built AutoPR, an autonomous LLM agent that scans bounty platforms, triages issues with Qwen-Max, writes fixes with a Qwen-Plus tool loop, and opens pull requests unattended.">
+    <link rel="canonical" href="https://64johnlee.github.io/portfolio/autopr.html">
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/208139204?v=4&s=32">
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://64johnlee.github.io/portfolio/autopr.html">
+    <meta property="og:title" content="AutoPR: An Autonomous Agent That Finds Bounties and Ships Pull Requests">
+    <meta property="og:description" content="Two models, six tools, one SQLite memory: the engineering decisions behind an agent that submits real pull requests unattended.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/208139204?v=4">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --border: rgba(255, 255, 255, 0.08);
+            --green: #10b981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.75;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 2rem; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: 0.88rem;
+            margin: 1rem 0 2rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+        article header { padding: 0 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .article-meta { color: var(--text-secondary); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
+        .article-meta a { color: var(--accent-light); }
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        p { color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 1.1rem; }
+        strong { color: var(--text-primary); }
+        a { color: var(--accent-light); }
+        pre {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem 1.3rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1.1rem;
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.1em 0.4em;
+            color: var(--accent-light);
+        }
+        pre code { background: none; border: none; padding: 0; color: inherit; }
+        ul { margin: 0 0 1.1rem 1.3rem; }
+        li { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.45rem; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 1.2rem; font-size: 0.88rem; }
+        th, td { text-align: left; padding: 0.6rem 0.9rem; border: 1px solid var(--border); color: var(--text-secondary); }
+        th { color: var(--text-primary); background: var(--bg-card); font-weight: 600; }
+        .callout {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 1rem 1.3rem;
+            margin-bottom: 1.2rem;
+        }
+        .callout p { margin: 0; font-size: 0.92rem; }
+        footer {
+            text-align: center;
+            padding: 2.5rem 0 1rem;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 1.25rem; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-link">&larr; John Lee &mdash; AI Engineer, Singapore</a>
+
+        <article>
+            <header>
+                <h1>AutoPR: Building an Autonomous Agent That Finds Bounties and Ships Pull Requests</h1>
+                <p class="article-meta">June 2026 &middot; <a href="https://github.com/64johnlee/autopr" rel="noopener noreferrer" target="_blank">source on GitHub</a> &middot; built for the Qwen Cloud Global AI Hackathon (Autopilot Agent track)</p>
+            </header>
+
+            <p>
+                Open-source bounty hunting has a brutal property: it is a speed game. When a $250 issue opens on a
+                popular bounty repo, the first credible proposal usually appears within minutes. I once watched a
+                one-hour-old issue accumulate eighteen competing proposals. A human checking email a few times a day
+                is structurally unable to compete &mdash; not for lack of skill, but for lack of latency.
+            </p>
+            <p>
+                So I built <strong>AutoPR</strong>: an agent that runs the entire loop unattended &mdash; scan bounty
+                platforms, decide whether an issue is worth attempting, clone the repo, write the fix with real coding
+                tools, run the tests, and open the pull request. This post covers the engineering decisions that
+                mattered, including the ones I got wrong first.
+            </p>
+
+            <h2>The loop</h2>
+            <pre><code>Opire API ──┐
+Algora API ─┼─► Scanner ─► Triage (Qwen-Max) ─► skip?
+GitHub  ────┘                  │
+                               ▼
+                       Coder (Qwen-Plus)
+                  list_files · read_file · search_code
+                  write_file · run_command · finish()
+                               │
+                        PR Submitter
+                  fork → branch → push → PR
+                               │
+                        Memory (SQLite)
+                  outcome → per-repo merge rate</code></pre>
+            <p>
+                Five components, one process, one SQLite file. The dashboard streams every event over
+                server-sent events, so I can watch the agent think in real time from a browser tab.
+            </p>
+
+            <h2>Two models, deliberately</h2>
+            <p>
+                AutoPR uses <strong>Qwen-Max for triage and Qwen-Plus for coding</strong>, and the split is the
+                single best architectural decision in the project. Triage is a judgment problem: read an issue,
+                estimate whether a fix is achievable by an agent, output a confidence score and a technical approach.
+                That benefits from the strongest reasoning model available. Coding, by contrast, is dozens of
+                tool-loop iterations per attempt &mdash; read a file, patch it, run the tests, read the failure,
+                patch again. Paying frontier-reasoning prices per iteration would make the economics absurd.
+            </p>
+            <table>
+                <tr><th>Stage</th><th>Model</th><th>Why</th></tr>
+                <tr><td>Triage</td><td>Qwen-Max</td><td>One expensive, high-stakes judgment per issue</td></tr>
+                <tr><td>Coding</td><td>Qwen-Plus</td><td>Many cheap, fast iterations per attempt</td></tr>
+            </table>
+            <p>
+                Triage returns structured JSON &mdash; a score from 0 to 1, a skip flag, and a proposed approach.
+                The approach field matters more than the score: it becomes the opening context for the coder, so the
+                expensive model effectively writes the cheap model's briefing.
+            </p>
+
+            <h2>Six tools are enough</h2>
+            <p>
+                The coder is a classic tool-loop agent. My first instinct was to give it a rich toolkit &mdash;
+                git operations, dependency installation, web search, linters. Almost all of it was a mistake.
+                Every added tool widens the space of wrong actions, and the model spends turns exploring tools
+                instead of fixing the bug. The shipped version has exactly six:
+            </p>
+            <ul>
+                <li><code>list_files</code> and <code>read_file</code> &mdash; orientation</li>
+                <li><code>search_code</code> &mdash; find the offending symbol fast instead of reading the whole tree</li>
+                <li><code>write_file</code> &mdash; the actual fix</li>
+                <li><code>run_command</code> &mdash; run the test suite, nothing fancier</li>
+                <li><code>finish()</code> &mdash; the agent's explicit declaration that it is done, with a summary</li>
+            </ul>
+            <p>
+                <code>finish()</code> deserves a note: making termination an explicit tool call, rather than inferring
+                it from the model's prose, eliminated a whole class of half-finished attempts. If the agent never
+                calls <code>finish()</code> within the iteration budget, the attempt is marked failed and nothing
+                is submitted. No PR is better than a broken PR.
+            </p>
+
+            <h2>The defensive layer is the real product</h2>
+            <p>
+                The naive version of this agent loses money. The profitable version is mostly guardrails:
+            </p>
+            <ul>
+                <li><strong>Competing-PR check before spending a single token.</strong> If the issue already has
+                    linked PRs or a swarm of proposals, the expected value is near zero and the scanner skips it.
+                    This one check eliminates the majority of wasted attempts.</li>
+                <li><strong>Per-repo merge-rate memory.</strong> Every attempt's outcome lands in SQLite. After five
+                    attempts on a repo, AutoPR computes a merge rate; below 20%, the repo is blacklisted. Some
+                    maintainers never merge outside contributions &mdash; the agent learns who they are so I stop
+                    paying to find out.</li>
+                <li><strong>Test-gated submission.</strong> If <code>run_command</code> can find a test suite and it
+                    fails after the patch, the attempt dies locally. The PR submitter only ever sees green attempts.</li>
+            </ul>
+            <div class="callout">
+                <p><strong>The uncomfortable lesson:</strong> the LLM is maybe a third of the system. The rest is
+                economics enforcement &mdash; deciding what <em>not</em> to attempt, remembering what didn't work,
+                and refusing to ship anything unverified.</p>
+            </div>
+
+            <h2>Watching it work: SSE over WebSockets</h2>
+            <p>
+                The dashboard is FastAPI serving a single page that subscribes to an event stream. I chose
+                server-sent events over WebSockets because the data flow is strictly one-directional &mdash; the
+                browser never talks back &mdash; and SSE gives automatic reconnection for free. Every component
+                emits typed events (<code>scanned</code>, <code>triaging</code>, <code>coding</code>,
+                <code>pr_open</code>), which also makes the demo video pipeline trivial: replay a recorded event
+                log through the real dashboard and screen-record it.
+            </p>
+
+            <h2>Costs and honest numbers</h2>
+            <p>
+                The whole thing runs on a small Alibaba Cloud ECS instance (~$8/month) with pay-per-token model
+                calls through Model Studio. A full scan-triage-code-submit cycle costs cents; triage-and-skip
+                costs a fraction of a cent. The economics work precisely because the defensive layer ensures the
+                expensive path only runs on issues with a real chance of paying out.
+            </p>
+            <p>
+                Is it a money printer? No. Bounty markets are competitive, and merge decisions belong to human
+                maintainers with their own preferences and timelines. What the agent buys is <strong>latency and
+                coverage</strong>: it is always watching, it never gets bored triaging, and it only escalates to
+                expensive work when the numbers justify it. That pattern &mdash; cheap continuous monitoring,
+                LLM judgment at the gate, expensive action behind guardrails &mdash; generalizes far beyond
+                bounties; it is the same architecture I now use for inbox triage and back-office automation.
+            </p>
+
+            <h2>Stack</h2>
+            <p>
+                Python 3.11, FastAPI + SSE, SQLite, gh CLI, Qwen-Max + Qwen-Plus via Alibaba Cloud Model Studio
+                (OpenAI-compatible API), Docker on ECS. Source: <a href="https://github.com/64johnlee/autopr"
+                rel="noopener noreferrer" target="_blank">github.com/64johnlee/autopr</a>. Demo video on the
+                <a href="https://devpost.com/software/autopr-j27atz" rel="noopener noreferrer" target="_blank">Devpost
+                submission</a>.
+            </p>
+        </article>
+
+        <footer>
+            <p>John Lee &mdash; AI Engineer, Singapore &mdash; <a href="./">portfolio</a> &middot; <a href="mailto:64lamei@gmail.com">64lamei@gmail.com</a></p>
+        </footer>
+    </div>
+</body>
+</html>
